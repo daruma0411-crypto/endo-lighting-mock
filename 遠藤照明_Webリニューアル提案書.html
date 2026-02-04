@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遠藤照明様 Webサイトリニューアルのご提案</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #ed8936;
+            --light: #f7fafc;
+            --text: #2d3748;
+            --border: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+            color: var(--text);
+            background: var(--light);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        header .meta {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        nav a {
+            color: var(--primary);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+        
+        nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Sections */
+        section {
+            background: white;
+            margin: 30px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        section h2 {
+            background: var(--primary);
+            color: white;
+            padding: 20px 30px;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+        
+        section h3 {
+            color: var(--primary);
+            font-size: 1.2em;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        section h4 {
+            color: var(--secondary);
+            font-size: 1.05em;
+            margin: 25px 0 10px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        /* Executive Summary Box */
+        .summary-box {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border-left: 4px solid var(--accent);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .summary-box p {
+            font-size: 1.1em;
+            line-height: 2;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        th {
+            background: var(--light);
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        tr:hover {
+            background: #f8fafc;
+        }
+        
+        .center {
+            text-align: center;
+        }
+        
+        /* Highlight cells */
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .strong {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        /* Code/Diagram blocks */
+        .diagram {
+            background: #1a202c;
+            color: #a0aec0;
+            padding: 25px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+            overflow-x: auto;
+            white-space: pre;
+            margin: 20px 0;
+        }
+        
+        .diagram .accent {
+            color: #68d391;
+        }
+        
+        .diagram .highlight {
+            color: #f6ad55;
+        }
+        
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 25px;
+            border: 1px solid var(--border);
+        }
+        
+        .card h5 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        /* Points list */
+        .points {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .points li {
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: var(--light);
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .points .number {
+            background: var(--accent);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        /* Phase timeline */
+        .timeline {
+            margin: 30px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        
+        .timeline-marker {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            padding-bottom: 20px;
+            border-left: 2px solid var(--border);
+            padding-left: 20px;
+            margin-left: -30px;
+        }
+        
+        .timeline-item:last-child .timeline-content {
+            border-left: none;
+        }
+        
+        /* Before/After */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .before, .after {
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .before {
+            background: #fed7d7;
+            border: 2px solid #fc8181;
+        }
+        
+        .after {
+            background: #c6f6d5;
+            border: 2px solid #68d391;
+        }
+        
+        .before h5, .after h5 {
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+            font-size: 0.9em;
+        }
+        
+        footer .company {
+            font-size: 1.1em;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.6em;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            nav a {
+                display: block;
+                text-align: center;
+            }
+            
+            .compare-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .diagram {
+                font-size: 0.75em;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            nav {
+                display: none;
+            }
+            
+            section {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>遠藤照明様 Webサイトリニューアルのご提案</h1>
+        <p class="subtitle">JOBサポートメニュー UI/UX刷新プロジェクト</p>
+        <p class="meta">提案日: 2026年2月 ｜ 提案者: AKGNET株式会社</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#summary">サマリー</a></li>
+            <li><a href="#analysis">現状分析</a></li>
+            <li><a href="#issues">課題整理</a></li>
+            <li><a href="#direction">提案方向性</a></li>
+            <li><a href="#proposal">改善提案</a></li>
+            <li><a href="#effect">期待効果</a></li>
+            <li><a href="#plan">進め方</a></li>
+            <li><a href="#future">将来構想</a></li>
+            <li><a href="#next">次のステップ</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <!-- 1. Executive Summary -->
+        <section id="summary">
+            <h2>1. エグゼクティブサマリー</h2>
+            <div class="content">
+                <div class="summary-box">
+                    <p><strong>遠藤照明様のJOBサポートメニューは、機能面で業界トップクラスの充実度を誇ります。</strong></p>
+                    <p><strong>しかし、その強みがUI/UXの古さにより十分に伝わっていません。</strong></p>
+                    <p><strong>本提案は「機能はそのまま、器（UI/UX）を刷新する」ことで、競合優位性をより明確に打ち出すことを目的としています。</strong></p>
+                </div>
+
+                <h3>3つのポイント</h3>
+                <ul class="points">
+                    <li>
+                        <span class="number">1</span>
+                        <div>
+                            <strong>機能は業界トップ</strong><br>
+                            コスト比較、提案書作成など営業支援機能は競合を凌駕
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number">2</span>
+                        <div>
+                            <strong>課題はUI/UXのみ</strong><br>
+                            新機能開発ではなく、見せ方・使いやすさの改善
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number">3</span>
+                        <div>
+                            <strong>投資対効果が高い</strong><br>
+                            大規模開発不要、デザイン刷新で競争力向上
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 2. 現状分析 -->
+        <section id="analysis">
+            <h2>2. 現状分析</h2>
+            <div class="content">
+                <h3>2.1 競合比較調査</h3>
+                <p>照明メーカー3社のWebサイト（プロ向け機能）を比較調査しました。</p>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <h5>遠藤照明</h5>
+                        <p>JOBサポートメニュー</p>
+                    </div>
+                    <div class="card">
+                        <h5>パナソニック</h5>
+                        <p>P.L.A.M.（照明設計サポート）</p>
+                    </div>
+                    <div class="card">
+                        <h5>Signify</h5>
+                        <p>Commercial Lighting Products</p>
+                    </div>
+                </div>
+
+                <h3>2.2 機能比較サマリー</h3>
+                
+                <h4>設計支援ツール</h4>
+                <table>
+                    <tr>
+                        <th>項目</th>
+                        <th class="center">遠藤</th>
+                        <th class="center">パナソニック</th>
+                        <th class="center">Signify</th>
+                    </tr>
+                    <tr>
+                        <td>2次元照度計算</td>
+                        <td class="center">◎</td>
+                        <td class="center">◎</td>
+                        <td class="center">△</td>
+                    </tr>
+                    <tr>
+                        <td>3Dシミュレーション</td>
+                        <td class="center">○</td>
+                        <td class="center">◎</td>
+                        <td class="center">○</td>
+                    </tr>
+                    <tr>
+                        <td>BIM双方向連携</td>
+                        <td class="center">△</td>
+                        <td class="center">◎</td>
+                        <td class="center">○</td>
+                    </tr>
+                </table>
+
+                <h4>提案・営業支援 ← <span class="highlight">遠藤照明の強み</span></h4>
+                <table>
+                    <tr>
+                        <th>項目</th>
+                        <th class="center">遠藤</th>
+                        <th class="center">パナソニック</th>
+                        <th class="center">Signify</th>
+                    </tr>
+                    <tr>
+                        <td>コストシミュレーション</td>
+                        <td class="center highlight">◎</td>
+                        <td class="center">△</td>
+                        <td class="center">×</td>
+                    </tr>
+                    <tr>
+                        <td>既存vs提案比較</td>
+                        <td class="center highlight">◎</td>
+                        <td class="center">△</td>
+                        <td class="center">×</td>
+                    </tr>
+                    <tr>
+                        <td>提案書自動生成</td>
+                        <td class="center highlight">◎</td>
+                        <td class="center">○</td>
+                        <td class="center">△</td>
+                    </tr>
+                    <tr>
+                        <td>容量リスト作成</td>
+                        <td class="center highlight">◎</td>
+                        <td class="center">△</td>
+                        <td class="center">×</td>
+                    </tr>
+                    <tr>
+                        <td>間接照明設計ガイド</td>
+                        <td class="center highlight">◎</td>
+                        <td class="center">△</td>
+                        <td class="center">×</td>
+                    </tr>
+                </table>
+
+                <h4>UI/UX</h4>
+                <table>
+                    <tr>
+                        <th>項目</th>
+                        <th class="center">遠藤</th>
+                        <th class="center">パナソニック</th>
+                        <th class="center">Signify</th>
+                    </tr>
+                    <tr>
+                        <td>モダンUI</td>
+                        <td class="center">△</td>
+                        <td class="center">○</td>
+                        <td class="center highlight">◎</td>
+                    </tr>
+                    <tr>
+                        <td>レスポンシブ対応</td>
+                        <td class="center">△</td>
+                        <td class="center">○</td>
+                        <td class="center highlight">◎</td>
+                    </tr>
+                    <tr>
+                        <td>ナビゲーション</td>
+                        <td class="center">△</td>
+                        <td class="center">○</td>
+                        <td class="center highlight">◎</td>
+                    </tr>
+                </table>
+
+                <h3>2.3 3社ポジショニング</h3>
+                <div class="diagram">                    設計者向け
+                        ↑
+                        │
+           パナソニック ●
+          （BIM・照度計算）
+                        │
+    UI/UX ←────────────┼────────────→ 機能充実
+    重視               │               重視
+                        │
+         Signify ●     │      ● <span class="highlight">遠藤照明</span>
+       （モダンUI）     │    （提案・営業支援）
+                        │
+                        ↓
+                    営業・代理店向け</div>
+                <p><strong>遠藤照明は「営業・提案支援」という独自のポジションを確立している。</strong></p>
+            </div>
+        </section>
+
+        <!-- 3. 課題整理 -->
+        <section id="issues">
+            <h2>3. 課題整理</h2>
+            <div class="content">
+                <h3>3.1 現状の課題</h3>
+                <table>
+                    <tr>
+                        <th class="center" style="width:40px">#</th>
+                        <th style="width:150px">課題</th>
+                        <th>詳細</th>
+                    </tr>
+                    <tr>
+                        <td class="center">1</td>
+                        <td class="strong">情報過多</td>
+                        <td>サイドメニューの項目が多く、何から使えばいいか分かりにくい</td>
+                    </tr>
+                    <tr>
+                        <td class="center">2</td>
+                        <td class="strong">UIの古さ</td>
+                        <td>2010年代のデザイン、競合と比較すると見劣りする</td>
+                    </tr>
+                    <tr>
+                        <td class="center">3</td>
+                        <td class="strong">モバイル非対応</td>
+                        <td>スマートフォンでの閲覧・操作が困難</td>
+                    </tr>
+                    <tr>
+                        <td class="center">4</td>
+                        <td class="strong">ステップの複雑さ</td>
+                        <td>4ステップUIが複数あり、初見では理解しにくい</td>
+                    </tr>
+                    <tr>
+                        <td class="center">5</td>
+                        <td class="strong">強みが埋もれている</td>
+                        <td>優れた機能が多いが、その価値が伝わっていない</td>
+                    </tr>
+                </table>
+
+                <h3>3.2 課題の本質</h3>
+                <div class="summary-box">
+                    <p>問題は「機能不足」ではない。<br>
+                    問題は「見せ方・使いやすさ」である。</p>
+                    <p><strong>→ 新機能開発ではなく、UI/UX刷新で解決できる。</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 提案の方向性 -->
+        <section id="direction">
+            <h2>4. 提案の方向性</h2>
+            <div class="content">
+                <h3>4.1 コンセプト</h3>
+                <div class="diagram">
+   遠藤照明の「機能的強み」
+         ×
+   Signifyの「UI/UX」
+         ×
+   パナソニックの「コンテンツ充実度」
+
+   = <span class="highlight">3社のベストミックス</span></div>
+
+                <h3>4.2 各社から取り入れる要素</h3>
+                <table>
+                    <tr>
+                        <th>取り入れ元</th>
+                        <th>要素</th>
+                        <th>適用内容</th>
+                    </tr>
+                    <tr>
+                        <td class="strong">Signify</td>
+                        <td>メガメニュー</td>
+                        <td>JOBサポートメニューの再設計</td>
+                    </tr>
+                    <tr>
+                        <td class="strong">Signify</td>
+                        <td>モダンデザイン</td>
+                        <td>全体のビジュアル刷新</td>
+                    </tr>
+                    <tr>
+                        <td class="strong">Signify</td>
+                        <td>レスポンシブ</td>
+                        <td>モバイル完全対応</td>
+                    </tr>
+                    <tr>
+                        <td class="strong">Signify</td>
+                        <td>製品比較UI</td>
+                        <td>サイドバイサイド比較機能</td>
+                    </tr>
+                    <tr>
+                        <td class="strong">パナソニック</td>
+                        <td>施工事例充実</td>
+                        <td>事例コンテンツ拡充</td>
+                    </tr>
+                    <tr>
+                        <td class="strong">パナソニック</td>
+                        <td>設計資料体系化</td>
+                        <td>ポータル的な構成</td>
+                    </tr>
+                    <tr>
+                        <td class="strong">遠藤（強化）</td>
+                        <td>提案支援機能</td>
+                        <td>UIを刷新して前面に</td>
+                    </tr>
+                </table>
+
+                <h3>4.3 提案の3本柱</h3>
+                <ul class="points">
+                    <li>
+                        <span class="number">1</span>
+                        <div>
+                            <strong>見せ方の刷新</strong><br>
+                            Signify風UI/UXで現代化 → 第一印象向上、離脱率低下
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number">2</span>
+                        <div>
+                            <strong>強みの可視化</strong><br>
+                            提案支援機能を前面に → 競合差別化の明確化
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number">3</span>
+                        <div>
+                            <strong>導線の最適化</strong><br>
+                            ユーザー目的別の入口 → 目的機能へ最短到達
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 5. 具体的な改善提案 -->
+        <section id="proposal">
+            <h2>5. 具体的な改善提案</h2>
+            <div class="content">
+                <h3>5.1 サイト構成の再設計</h3>
+                
+                <div class="compare-grid">
+                    <div class="before">
+                        <h5>❌ Before（現状）</h5>
+                        <div class="diagram" style="background:#2d3748;font-size:0.8em;">┌──────────────────────────┐
+│ ヘッダー                 │
+├────────┬─────────────────┤
+│        │                 │
+│ サイド │                 │
+│ メニュー│    コンテンツ   │
+│ (12項目)│                 │
+│        │                 │
+└────────┴─────────────────┘
+<span class="highlight">※ 項目が多く、どこから使えばいいか分かりにくい</span></div>
+                    </div>
+                    <div class="after">
+                        <h5>✅ After（提案）</h5>
+                        <div class="diagram" style="background:#2d3748;font-size:0.8em;">┌──────────────────────────────┐
+│ ロゴ / メガメニュー / 検索   │
+├──────────────────────────────┤
+│                              │
+│  【4カテゴリに整理】         │
+│                              │
+│  製品   設計   提案   事例   │
+│                              │
+└──────────────────────────────┘
+<span class="accent">※ 目的別に整理、3クリック以内で目的の機能へ</span></div>
+                    </div>
+                </div>
+
+                <h3>5.2 メガメニュー構成案</h3>
+                <div class="card-grid">
+                    <div class="card">
+                        <h5>製品を探す</h5>
+                        <p>├ カテゴリから探す<br>
+                        ├ 品番から探す<br>
+                        ├ 後継品・代替品検索<br>
+                        └ 製品を比較する</p>
+                    </div>
+                    <div class="card">
+                        <h5>設計サポート</h5>
+                        <p>├ 照度計算ツール<br>
+                        ├ DIALux evo連携<br>
+                        ├ 間接照明設計ガイド<br>
+                        └ 設計資料ダウンロード</p>
+                    </div>
+                    <div class="card">
+                        <h5>提案ツール</h5>
+                        <p>├ コストシミュレーション<br>
+                        ├ 提案書を作成<br>
+                        ├ 容量リストを作成<br>
+                        └ 画像・姿図リスト作成</p>
+                    </div>
+                    <div class="card">
+                        <h5>施工事例・サポート</h5>
+                        <p>├ 施工事例を見る<br>
+                        ├ モデルプラン<br>
+                        ├ 使い方ナビ<br>
+                        └ お問い合わせ</p>
+                    </div>
+                </div>
+
+                <h3>5.3 トップページ改善案</h3>
+                <div class="diagram">┌─────────────────────────────────────────────────────┐
+│                                                     │
+│  【ヒーローエリア】                                 │
+│  「設計から提案まで、ワンストップで。」             │
+│                                                     │
+├─────────────────────────────────────────────────────┤
+│                                                     │
+│  【目的別入口 - 4つのカード】                       │
+│                                                     │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐  │
+│  │ 製品を  │ │ 設計    │ │ 提案書  │ │ 事例を  │  │
+│  │ 探す    │ │ する    │ │ 作る    │ │ 見る    │  │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘  │
+│                                                     │
+├─────────────────────────────────────────────────────┤
+│                                                     │
+│  【遠藤照明の強み訴求エリア】                       │
+│  「営業の<span class="highlight">"あったらいいな"</span>が、ここにある」          │
+│                                                     │
+│  ・コスト比較シミュレーション                       │
+│  ・ワンクリック提案書作成                           │
+│  ・ランニングコスト自動計算                         │
+│                                                     │
+└─────────────────────────────────────────────────────┘</div>
+
+                <h3>5.4 機能別改善ポイント</h3>
+                
+                <h4>コストシミュレーション</h4>
+                <table>
+                    <tr><th>項目</th><th>Before</th><th>After</th></tr>
+                    <tr><td>入力UI</td><td>テキストボックス羅列</td><td>カード型・直感的入力</td></tr>
+                    <tr><td>結果表示</td><td>表形式のみ</td><td>グラフ + 表</td></tr>
+                    <tr><td>比較表現</td><td>数値のみ</td><td>削減率・年間効果を視覚化</td></tr>
+                    <tr><td>出力</td><td>ダウンロードのみ</td><td>プレビュー + ダウンロード</td></tr>
+                </table>
+
+                <h4>提案書作成</h4>
+                <table>
+                    <tr><th>項目</th><th>Before</th><th>After</th></tr>
+                    <tr><td>ステップ</td><td>4ステップ（説明が長い）</td><td>3ステップ（シンプル化）</td></tr>
+                    <tr><td>品番入力</td><td>テキストエリア</td><td>ドラッグ&ドロップ対応</td></tr>
+                    <tr><td>プレビュー</td><td>なし</td><td>リアルタイムプレビュー</td></tr>
+                    <tr><td>テンプレート</td><td>固定</td><td>複数テンプレート選択</td></tr>
+                </table>
+
+                <h4>製品検索</h4>
+                <table>
+                    <tr><th>項目</th><th>Before</th><th>After</th></tr>
+                    <tr><td>検索方式</td><td>品番/カテゴリが別ページ</td><td>統合検索 + フィルター</td></tr>
+                    <tr><td>絞り込み</td><td>ページ遷移必要</td><td>サイドフィルター（その場で）</td></tr>
+                    <tr><td>結果表示</td><td>リスト形式</td><td>グリッド/リスト切替</td></tr>
+                    <tr><td>比較</td><td>なし</td><td>チェックして比較ボタン</td></tr>
+                </table>
+
+                <h3>5.5 UI/UX改善の重点ポイント</h3>
+
+                <h4>1. 導線の短縮（スクロール不要のアクション配置）</h4>
+                <div class="compare-grid">
+                    <div class="before">
+                        <h5>従来</h5>
+                        <p>製品画像 → 長い製品仕様 → スクロール... → [ダウンロード]</p>
+                    </div>
+                    <div class="after">
+                        <h5>改善後</h5>
+                        <p>製品画像 + 仕様 ｜ <strong>アクションエリア</strong><br>
+                        ・仕様図DL ・姿図DL ・APIデータ取得 ・提案書に追加</p>
+                    </div>
+                </div>
+                <p><strong>効果</strong>: ファーストビューで主要アクションが完結。営業担当者が現場で素早く資料取得可能。</p>
+
+                <h4>2. モーダル選択によるランプ組み合わせ</h4>
+                <div class="diagram">┌──────────────────────────────────────────┐
+│ 適合ランプを選択                    [×] │
+├──────────────────────────────────────────┤
+│ 絞り込み: [光色▼] [調光▼] [出力▼]      │
+├──────────────────────────────────────────┤
+│ ○ SAD423X 電球色 6900lm    ¥38,500     │
+│ ○ SAD423X-K 温白色 6900lm  ¥38,500     │
+│ ○ SAD428X 電球色 3385lm    ¥25,200     │
+│ ...                                      │
+├──────────────────────────────────────────┤
+│              [<span class="accent">選択してセット価格を表示</span>]  │
+└──────────────────────────────────────────┘</div>
+                <p><strong>効果</strong>: 多数の適合ランプから効率的に選択可能。光色・出力での絞り込みで選択をサポート。</p>
+
+                <h4>3. セット価格の明示表示</h4>
+                <div class="diagram">┌─────────────────────────────────┐
+│ セット価格                       │
+│                                  │
+│   本体: ERK9985W    ¥10,600     │
+│ ＋ランプ: SAD423X   ¥38,500     │
+│ ─────────────────────           │
+│   合計:            <span class="highlight">¥49,100</span>      │
+│                                  │
+│ [カートに追加] [見積依頼]        │
+└─────────────────────────────────┘</div>
+                <p><strong>効果</strong>: 本体＋ランプの組み合わせ合計が一目で把握可能。見積作成の効率化。</p>
+
+                <h4>4. クイックダウンロードボタン群</h4>
+                <div class="diagram">┌─────────────────────────────────┐
+│ クイックダウンロード             │
+│                                  │
+│ [仕様図] [姿図] [取説] [IES]    │
+│                                  │
+│ [<span class="accent">一括ダウンロード（ZIP）</span>]        │
+└─────────────────────────────────┘</div>
+                <p><strong>効果</strong>: 必要な資料をワンクリックで取得。複数資料の一括DLで時間短縮。</p>
+
+                <h3>5.6 モバイル対応</h3>
+                <div class="diagram">【スマートフォン表示】
+
+┌─────────────────┐
+│ ≡  ENDO   🔍   │  ← ハンバーガーメニュー
+├─────────────────┤
+│                 │
+│  製品を探す     │
+│  [    →    ]   │
+│                 │
+│  提案ツール     │
+│  [    →    ]   │
+│                 │
+│  設計サポート   │
+│  [    →    ]   │
+│                 │
+└─────────────────┘
+
+<span class="accent">※ 現場でスマホから製品検索、代替品確認が可能に</span></div>
+            </div>
+        </section>
+
+        <!-- 6. 期待効果 -->
+        <section id="effect">
+            <h2>6. 期待効果</h2>
+            <div class="content">
+                <h3>6.1 定性的効果</h3>
+                <table>
+                    <tr><th class="center" style="width:40px">#</th><th>効果</th><th>詳細</th></tr>
+                    <tr><td class="center">1</td><td class="strong">ブランドイメージ向上</td><td>モダンなUIで先進的な印象を与える</td></tr>
+                    <tr><td class="center">2</td><td class="strong">ユーザー満足度向上</td><td>目的の機能に迷わずたどり着ける</td></tr>
+                    <tr><td class="center">3</td><td class="strong">競合との差別化明確化</td><td>「提案支援の遠藤」というポジション確立</td></tr>
+                    <tr><td class="center">4</td><td class="strong">営業活動の効率化</td><td>現場でのモバイル利用が可能に</td></tr>
+                    <tr><td class="center">5</td><td class="strong">問い合わせ対応削減</td><td>使い方が分かりやすくなり自己解決率向上</td></tr>
+                </table>
+
+                <h3>6.2 定量的効果（想定）</h3>
+                <table>
+                    <tr><th>指標</th><th>現状（想定）</th><th>目標</th></tr>
+                    <tr><td>直帰率</td><td>高い</td><td class="highlight">20%改善</td></tr>
+                    <tr><td>機能利用率</td><td>低い</td><td class="highlight">30%向上</td></tr>
+                    <tr><td>モバイルアクセス</td><td>少ない</td><td class="highlight">対応により増加</td></tr>
+                    <tr><td>問い合わせ数</td><td>-</td><td class="highlight">使い方系の削減</td></tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- 7. プロジェクトの進め方 -->
+        <section id="plan">
+            <h2>7. プロジェクトの進め方</h2>
+            <div class="content">
+                <h3>7.1 フェーズ構成</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <strong>要件定義・設計</strong><br>
+                            現状詳細分析、ユーザーヒアリング、UI設計
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <strong>デザイン</strong><br>
+                            ビジュアルデザイン、プロトタイプ作成
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">3</div>
+                        <div class="timeline-content">
+                            <strong>開発</strong><br>
+                            フロントエンド実装、既存システム連携
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">4</div>
+                        <div class="timeline-content">
+                            <strong>テスト・リリース</strong><br>
+                            ユーザーテスト、段階的リリース
+                        </div>
+                    </div>
+                </div>
+
+                <h3>7.2 スコープ案</h3>
+                <div class="card-grid">
+                    <div class="card" style="border-left: 4px solid #e53e3e;">
+                        <h5>第1弾（優先度高）</h5>
+                        <p>・トップページ刷新<br>
+                        ・メガメニュー実装<br>
+                        ・製品検索UI改善<br>
+                        ・モバイル対応</p>
+                    </div>
+                    <div class="card" style="border-left: 4px solid #ed8936;">
+                        <h5>第2弾（優先度中）</h5>
+                        <p>・コストシミュレーションUI刷新<br>
+                        ・提案書作成機能UI改善<br>
+                        ・施工事例コンテンツ拡充</p>
+                    </div>
+                    <div class="card" style="border-left: 4px solid #38a169;">
+                        <h5>将来検討</h5>
+                        <p>・製品比較機能新設<br>
+                        ・BIM連携強化（要技術調査）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 将来構想 -->
+        <section id="future">
+            <h2>8. 将来構想：オープン製品データAPI戦略</h2>
+            <div class="content">
+                <h3>8.1 パナソニックとの差別化戦略</h3>
+                <p>パナソニックは「Lightning Flow」という独自のBIM連携ツールを開発しています。この<strong>プロプライエタリ（囲い込み）アプローチ</strong>を追従するのではなく、<strong>オープンAPI戦略</strong>で差別化を図ります。</p>
+
+                <div class="compare-grid">
+                    <div class="before">
+                        <h5>パナソニック方式</h5>
+                        <p>・自社ツールに囲い込み<br>
+                        ・設計者が学習コスト負担<br>
+                        ・メーカー主導</p>
+                    </div>
+                    <div class="after">
+                        <h5>遠藤照明方式（提案）</h5>
+                        <p>・オープンAPIで業界に開放<br>
+                        ・既存ワークフローに統合可能<br>
+                        ・設計事務所が自由に活用</p>
+                    </div>
+                </div>
+
+                <h3>8.2 オープン製品データAPI構想</h3>
+                <div class="summary-box">
+                    <p><strong>「遠藤照明の製品データを、設計事務所が自由に活用できるようにする」</strong></p>
+                    <p>・BIMソフト（Revit/Archicad）へのアドイン開発を設計事務所に委ねる<br>
+                    ・照明計算ソフト（DIALux等）との連携を容易にする<br>
+                    ・設計事務所独自のワークフローに組み込み可能</p>
+                </div>
+
+                <h4>提供するAPIエンドポイント例</h4>
+                <table>
+                    <tr><th>エンドポイント</th><th>内容</th><th>用途</th></tr>
+                    <tr><td><code>/products/search</code></td><td>製品検索</td><td>条件に合う製品を一括取得</td></tr>
+                    <tr><td><code>/products/{id}</code></td><td>製品詳細</td><td>型番・仕様・価格・納期</td></tr>
+                    <tr><td><code>/products/{id}/photometry</code></td><td>配光データ</td><td>IES/LDT形式で取得</td></tr>
+                    <tr><td><code>/products/{id}/cad</code></td><td>CADデータ</td><td>DXF/DWG/RFA形式</td></tr>
+                    <tr><td><code>/products/{id}/bim</code></td><td>BIM属性</td><td>IFC属性情報（JSON）</td></tr>
+                    <tr><td><code>/products/bulk</code></td><td>一括取得</td><td>複数製品データをまとめて</td></tr>
+                    <tr><td><code>/successors/{old_id}</code></td><td>後継品情報</td><td>廃番品→後継品マッピング</td></tr>
+                </table>
+
+                <h3>8.3 API戦略のメリット</h3>
+                <table>
+                    <tr><th>視点</th><th>メリット</th></tr>
+                    <tr><td class="strong">コスト</td><td>自社でBIMツール全体を開発するより低コスト</td></tr>
+                    <tr><td class="strong">スピード</td><td>段階的にAPI公開可能、早期リリース</td></tr>
+                    <tr><td class="strong">差別化</td><td>業界初のオープンAPI＝先進的イメージ</td></tr>
+                    <tr><td class="strong">エコシステム</td><td>サードパーティ開発者コミュニティ形成</td></tr>
+                    <tr><td class="strong">柔軟性</td><td>設計事務所の多様なワークフローに対応</td></tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- 9. 次のステップ -->
+        <section id="next">
+            <h2>9. 次のステップ</h2>
+            <div class="content">
+                <h3>ご検討いただきたい事項</h3>
+                <table>
+                    <tr><th class="center" style="width:40px">#</th><th>項目</th><th>内容</th></tr>
+                    <tr><td class="center">1</td><td class="strong">方向性の合意</td><td>本提案の方向性でよいか</td></tr>
+                    <tr><td class="center">2</td><td class="strong">優先順位の確認</td><td>どの機能から着手するか</td></tr>
+                    <tr><td class="center">3</td><td class="strong">関係者ヒアリング</td><td>営業・代理店の声を収集</td></tr>
+                    <tr><td class="center">4</td><td class="strong">技術要件の確認</td><td>既存システムとの連携方法</td></tr>
+                </table>
+
+                <h3>次回打ち合わせアジェンダ案</h3>
+                <ul class="points">
+                    <li><span class="number">1</span><div>本提案へのフィードバック</div></li>
+                    <li><span class="number">2</span><div>優先度・スコープの確定</div></li>
+                    <li><span class="number">3</span><div>プロジェクト体制の検討</div></li>
+                    <li><span class="number">4</span><div>概算スケジュールの確認</div></li>
+                </ul>
+
+                <h3>参考資料</h3>
+                <div class="card-grid">
+                    <div class="card">
+                        <h5>競合サイト</h5>
+                        <p>・パナソニック P.L.A.M.<br>
+                        ・Signify Products</p>
+                    </div>
+                    <div class="card">
+                        <h5>添付資料</h5>
+                        <p>・3社機能比較表（詳細版）<br>
+                        ・UIモック一式（12画面）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p class="company">AKGNET株式会社</p>
+        <p>担当: 岩下</p>
+        <p style="margin-top:20px;font-size:0.85em;">本提案書は初期ドラフトです。ご要望に応じて内容を調整いたします。</p>
+        <p style="margin-top:10px;font-size:0.8em;color:#a0aec0;">更新履歴: 2026年2月4日 初版作成</p>
+    </footer>
+
+</body>
+</html>
