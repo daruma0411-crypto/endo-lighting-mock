@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遠藤照明 Webリニューアル提案書</title>
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #2563eb;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+            line-height: 1.8;
+            color: var(--text);
+            background: #f1f5f9;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f172a 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        header h1 { font-size: 2.2em; margin-bottom: 15px; }
+        header .subtitle { opacity: 0.9; font-size: 1.1em; }
+        header .meta { margin-top: 20px; opacity: 0.7; font-size: 0.9em; }
+        
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        
+        section {
+            background: white;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        section h2 {
+            background: var(--primary);
+            color: white;
+            padding: 20px 30px;
+            font-size: 1.3em;
+        }
+        
+        .content { padding: 30px; }
+        
+        h3 {
+            color: var(--primary);
+            font-size: 1.15em;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        th { background: var(--light); font-weight: 600; }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 5px solid var(--accent);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .highlight-box p { margin: 8px 0; }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        
+        .badge-strength { background: #d1fae5; color: #065f46; }
+        .badge-improve { background: #dbeafe; color: #1e40af; }
+        .badge-future { background: #fef3c7; color: #92400e; }
+        
+        ul { margin-left: 25px; }
+        li { margin: 8px 0; }
+        
+        .cta-box {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .cta-box a {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.6em; }
+            .content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>遠藤照明様 Webサイトリニューアルのご提案</h1>
+        <p class="subtitle">JOBサポートメニュー UI/UX刷新プロジェクト</p>
+        <p class="meta">提案日: 2026年2月 ｜ 提案者: AKGNET株式会社</p>
+    </header>
+    
+    <div class="container">
+        
+        <section>
+            <h2>エグゼクティブサマリー</h2>
+            <div class="content">
+                <div class="highlight-box">
+                    <p><strong>遠藤照明様のJOBサポートメニューは、機能面で業界トップクラスの充実度を誇ります。</strong></p>
+                    <p>しかし、その強みがUI/UXの古さにより十分に伝わっていません。</p>
+                    <p><strong>本提案は「機能はそのまま、器（UI/UX）を刷新する」ことで、競合優位性をより明確に打ち出すことを目的としています。</strong></p>
+                </div>
+                
+                <h3>3つのポイント</h3>
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>ポイント</th>
+                        <th>内容</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td><span class="badge badge-strength">機能は業界トップ</span></td>
+                        <td>コスト比較、提案書作成など営業支援機能は競合を凌駕</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><span class="badge badge-improve">課題はUI/UXのみ</span></td>
+                        <td>新機能開発ではなく、見せ方・使いやすさの改善</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><span class="badge badge-future">投資対効果が高い</span></td>
+                        <td>大規模開発不要、デザイン刷新で競争力向上</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        
+        <section>
+            <h2>提案の方向性</h2>
+            <div class="content">
+                <h3>コンセプト</h3>
+                <p>遠藤照明の「機能的強み」 × Signifyの「UI/UX」 × パナソニックの「コンテンツ充実度」</p>
+                <p style="text-align:center;font-weight:600;margin:20px 0;">= 3社のベストミックス</p>
+                
+                <h3>提案の3本柱</h3>
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>柱</th>
+                        <th>内容</th>
+                        <th>効果</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>見せ方の刷新</td>
+                        <td>Signify風UI/UXで現代化</td>
+                        <td>第一印象向上、離脱率低下</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>強みの可視化</td>
+                        <td>提案支援機能を前面に</td>
+                        <td>競合差別化の明確化</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>導線の最適化</td>
+                        <td>ユーザー目的別の入口</td>
+                        <td>目的機能へ最短到達</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        
+        <section>
+            <h2>UI/UX改善の重点ポイント</h2>
+            <div class="content">
+                <h3>1. 導線の短縮</h3>
+                <ul>
+                    <li>アクションボタンを右側に集約、スクロール不要で主要操作完結</li>
+                    <li>ファーストビューで仕様図DL・API取得・提案書追加が可能</li>
+                </ul>
+                
+                <h3>2. モーダルランプ選択</h3>
+                <ul>
+                    <li>本体に適合するランプが多数ある場合、ポップアップで効率的に選択</li>
+                    <li>光色・出力でフィルター絞り込み可能</li>
+                </ul>
+                
+                <h3>3. セット価格の明示</h3>
+                <ul>
+                    <li>本体＋ランプの組み合わせ合計金額を一目で把握</li>
+                    <li>見積作成の効率化</li>
+                </ul>
+                
+                <h3>4. クイックダウンロード</h3>
+                <ul>
+                    <li>仕様図/姿図/取説/IESをワンクリックで取得</li>
+                    <li>一括ZIP対応</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section>
+            <h2>将来構想：オープンAPI戦略</h2>
+            <div class="content">
+                <div class="highlight-box">
+                    <p><strong>パナソニックの「Lightning Flow」追従ではなく、オープンAPI戦略で差別化</strong></p>
+                </div>
+                
+                <h3>API戦略のメリット</h3>
+                <ul>
+                    <li><strong>コスト</strong>：自社でBIMツール全体を開発するより低コスト</li>
+                    <li><strong>スピード</strong>：段階的にAPI公開可能、早期リリース</li>
+                    <li><strong>差別化</strong>：業界初のオープンAPI＝先進的イメージ</li>
+                    <li><strong>柔軟性</strong>：設計事務所の多様なワークフローに対応</li>
+                </ul>
+                
+                <h3>DIALux evoで対応可能な機能</h3>
+                <p>以下は業界標準ツールで対応可能（自社開発不要）：</p>
+                <ul>
+                    <li>3Dシミュレーション・器具自動配置</li>
+                    <li>断面表示・壁面配光CG</li>
+                    <li>照度計算・分布図作成</li>
+                </ul>
+            </div>
+        </section>
+        
+        <div class="cta-box">
+            <h3>UIモックをご確認ください</h3>
+            <p>8ページの完成版モックをご用意しています</p>
+            <a href="index.html">モックを見る →</a>
+        </div>
+        
+    </div>
+    
+    <footer>
+        <p><strong>AKGNET株式会社</strong></p>
+        <p>担当: 岩下</p>
+        <p style="margin-top:15px;font-size:0.85em;">※ 本提案書は初期ドラフトです。ご要望に応じて内容を調整いたします。</p>
+    </footer>
+</body>
+</html>
