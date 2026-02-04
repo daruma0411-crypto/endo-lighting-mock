@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERK9985W | 製品詳細 | ENDO LIGHTING JOBサポート</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 右上アクションエリア改善 */
+        .product-info-detail {
+            position: relative;
+        }
+
+        .product-actions-compact {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            font-size: 0.85rem;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            border-color: #e94560;
+            color: #e94560;
+        }
+
+        .action-btn-primary {
+            background: #e94560;
+            border-color: #e94560;
+            color: white;
+        }
+
+        .action-btn-primary:hover {
+            background: #d13a54;
+        }
+
+        .action-btn .icon {
+            font-size: 1rem;
+        }
+
+        /* セット価格表示 */
+        .price-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 0.9rem;
+        }
+
+        .price-row.total {
+            border-top: 2px solid #e94560;
+            margin-top: 8px;
+            padding-top: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .price-row.total .price-value {
+            color: #e94560;
+            font-size: 1.3rem;
+        }
+
+        .lamp-select-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: white;
+            border: 2px solid #e94560;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .lamp-select-trigger:hover {
+            background: #fff5f7;
+        }
+
+        .lamp-selected-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lamp-color-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+        }
+
+        .lamp-select-arrow {
+            font-size: 1.2rem;
+            color: #e94560;
+        }
+
+        /* モーダル */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        /* ランプフィルター */
+        .lamp-filter-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .lamp-filter-chip {
+            padding: 6px 14px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            background: white;
+        }
+
+        .lamp-filter-chip:hover,
+        .lamp-filter-chip.active {
+            background: #e94560;
+            border-color: #e94560;
+            color: white;
+        }
+
+        /* ランプグリッド */
+        .lamp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .lamp-option {
+            border: 2px solid #eee;
+            border-radius: 8px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lamp-option:hover {
+            border-color: #e94560;
+        }
+
+        .lamp-option.selected {
+            border-color: #e94560;
+            background: #fff5f7;
+        }
+
+        .lamp-option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .lamp-option-check {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: transparent;
+        }
+
+        .lamp-option.selected .lamp-option-check {
+            background: #e94560;
+            border-color: #e94560;
+            color: white;
+        }
+
+        .lamp-option-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .lamp-option-model {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .lamp-option-specs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .lamp-option-spec {
+            padding: 2px 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .lamp-option-price {
+            font-weight: 700;
+            color: #e94560;
+        }
+
+        /* 製品画像改善 */
+        .main-image {
+            background: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+        }
+
+        .thumbnail {
+            width: 70px;
+            height: 50px;
+            overflow: hidden;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* クイックDL */
+        .quick-download {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+        }
+
+        .quick-dl-btn {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 10px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .quick-dl-btn:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-text">ENDO</span>
+                    <span class="logo-sub">LIGHTING CORP.</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="search.html" class="active">製品を探す</a></li>
+                    <li class="nav-item"><a href="design-support.html">設計サポート</a></li>
+                    <li class="nav-item"><a href="tools.html">提案ツール</a></li>
+                    <li class="nav-item"><a href="#">事例・サポート</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="btn-contact">お問い合わせ</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main-content">
+        <div class="page-header page-header-compact">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="index.html">ホーム</a> &gt;
+                    <a href="search.html">製品を探す</a> &gt;
+                    <a href="#">ベースライト</a> &gt;
+                    <span>ERK9985W</span>
+                </nav>
+            </div>
+        </div>
+
+        <div class="product-detail-page">
+            <div class="container">
+                <!-- メイン情報 -->
+                <div class="product-detail-main">
+                    <!-- 画像ギャラリー -->
+                    <div class="product-gallery">
+                        <div class="main-image" id="mainImage">
+                            <img src="images/ERK9985W_SAD423X-K.jpg" alt="ERK9985W 設置イメージ">
+                        </div>
+                        <div class="thumbnail-list">
+                            <div class="thumbnail active" onclick="changeImage('images/ERK9985W_SAD423X-K.jpg', this)">
+                                <img src="images/ERK9985W_SAD423X-K.jpg" alt="設置イメージ">
+                            </div>
+                            <div class="thumbnail" onclick="changeImage('images/ERK9985W_SAD423X.jpg', this)">
+                                <img src="images/ERK9985W_SAD423X.jpg" alt="仕様書">
+                            </div>
+                            <div class="thumbnail" onclick="changeImage('images/ERK9986W_SAD428X-K.jpg', this)">
+                                <img src="images/ERK9986W_SAD428X-K.jpg" alt="別角度">
+                            </div>
+                            <div class="thumbnail" onclick="changeImage('images/ERK9986W_SAD428X.jpg', this)">
+                                <img src="images/ERK9986W_SAD428X.jpg" alt="寸法図">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 製品情報 -->
+                    <div class="product-info-detail">
+                        <p class="product-category-label">ベースライト &gt; 埋込下面開放形 W:300</p>
+                        <h1 class="product-title">ERK9985W</h1>
+                        <p class="product-subtitle">LEDベースライト 40Wタイプ 埋込下面開放形</p>
+
+                        <!-- アクションボタン（コンパクト） -->
+                        <div class="product-actions-compact">
+                            <button class="action-btn action-btn-primary">
+                                <span class="icon">📝</span>提案書に追加
+                            </button>
+                            <button class="action-btn">
+                                <span class="icon">⚖️</span>比較
+                            </button>
+                            <button class="action-btn">
+                                <span class="icon">💰</span>コスト計算
+                            </button>
+                            <button class="action-btn">
+                                <span class="icon">📦</span>一括DL
+                            </button>
+                            <button class="action-btn">
+                                <span class="icon">🔗</span>API
+                            </button>
+                        </div>
+
+                        <!-- 適合ランプ選択トリガー -->
+                        <div class="lamp-select-trigger" onclick="openLampModal()">
+                            <div class="lamp-selected-info">
+                                <div class="lamp-color-dot" style="background: linear-gradient(135deg, #fff, #f5f5f5);"></div>
+                                <div>
+                                    <div style="font-weight: 600;">SAD423X（5000K 昼白色）</div>
+                                    <div style="font-size: 0.85rem; color: #666;">40Wタイプ専用ユニット</div>
+                                </div>
+                            </div>
+                            <span class="lamp-select-arrow">▼ 変更</span>
+                        </div>
+
+                        <!-- セット価格 -->
+                        <div class="price-section">
+                            <div class="price-row">
+                                <span>本体 ERK9985W</span>
+                                <span>¥10,600</span>
+                            </div>
+                            <div class="price-row">
+                                <span>ランプ SAD423X</span>
+                                <span>¥38,500</span>
+                            </div>
+                            <div class="price-row total">
+                                <span>セット価格（税別）</span>
+                                <span class="price-value">¥49,100</span>
+                            </div>
+                        </div>
+
+                        <!-- クイックスペック -->
+                        <div class="quick-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">消費電力</span>
+                                <span class="spec-value">49.0W</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">光束</span>
+                                <span class="spec-value">6900lm</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">演色性</span>
+                                <span class="spec-value">Ra92</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">埋込穴</span>
+                                <span class="spec-value">W300×L1257</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">埋込深さ</span>
+                                <span class="spec-value">58mm</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">器具相当</span>
+                                <span class="spec-value">Hf32W×2</span>
+                            </div>
+                        </div>
+
+                        <!-- クイックダウンロード -->
+                        <div class="quick-download">
+                            <a href="#" class="quick-dl-btn">📄 仕様図</a>
+                            <a href="#" class="quick-dl-btn">📐 姿図DXF</a>
+                            <a href="#" class="quick-dl-btn">💡 配光IES</a>
+                            <a href="#" class="quick-dl-btn">🏗️ BIM</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- タブセクション（簡略化） -->
+                <div class="product-tabs-section">
+                    <div class="product-tabs">
+                        <button class="product-tab active">詳細仕様</button>
+                        <button class="product-tab">適合ランプ一覧</button>
+                        <button class="product-tab">ダウンロード</button>
+                        <button class="product-tab">施工情報</button>
+                    </div>
+
+                    <div class="product-tab-content">
+                        <div class="spec-table-section">
+                            <h3>基本仕様</h3>
+                            <table class="spec-table">
+                                <tbody>
+                                    <tr><th>品番</th><td>ERK9985W</td></tr>
+                                    <tr><th>品名</th><td>LEDベースライト 埋込下面開放形 W:300</td></tr>
+                                    <tr><th>本体価格</th><td>¥10,600（税別）</td></tr>
+                                    <tr><th>適合ランプ</th><td>40Wタイプ専用ユニット×1（別売）</td></tr>
+                                    <tr><th>本体色</th><td>白</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="spec-table-section">
+                            <h3>寸法・取付</h3>
+                            <table class="spec-table">
+                                <tbody>
+                                    <tr><th>埋込穴寸法</th><td>W300×L1257mm</td></tr>
+                                    <tr><th>埋込深さ</th><td>58mm</td></tr>
+                                    <tr><th>重量</th><td>3.3kg（ユニット込）</td></tr>
+                                    <tr><th>取付方法</th><td>埋込型</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="spec-table-section">
+                            <h3>機能</h3>
+                            <table class="spec-table">
+                                <tbody>
+                                    <tr><th>調光</th><td>無線調光タイプ（調光率1〜100%）</td></tr>
+                                    <tr><th>空調ダクト</th><td>回避型</td></tr>
+                                    <tr><th>付属品</th><td>連結金具付 / 無線モジュール付</td></tr>
+                                    <tr><th>器具相当</th><td>Hf32W×2 高出力型</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 関連製品（同シリーズ） -->
+                <div class="related-products-section">
+                    <h3>同シリーズ製品</h3>
+                    <div class="related-grid">
+                        <a href="#" class="related-card">
+                            <div class="related-image">
+                                <img src="images/ERK9986W_SAD428X-K.jpg" alt="ERK9986W" style="width:100%; height:80px; object-fit:cover; border-radius:4px;">
+                            </div>
+                            <div class="related-info">
+                                <p class="related-number">ERK9986W + SAD428X</p>
+                                <p class="related-spec">20Wタイプ W:300 L:600</p>
+                                <p class="related-price">¥35,800</p>
+                            </div>
+                        </a>
+                        <a href="#" class="related-card">
+                            <div class="related-image">
+                                <img src="images/ERK9987W_SAD423X-K.jpg" alt="ERK9987W" style="width:100%; height:80px; object-fit:cover; border-radius:4px;">
+                            </div>
+                            <div class="related-info">
+                                <p class="related-number">ERK9987W + SAD423X</p>
+                                <p class="related-spec">40Wタイプ W:190</p>
+                                <p class="related-price">¥48,100</p>
+                            </div>
+                        </a>
+                        <a href="#" class="related-card">
+                            <div class="related-image">
+                                <img src="images/ERK9988W_SAD428X-K.jpg" alt="ERK9988W" style="width:100%; height:80px; object-fit:cover; border-radius:4px;">
+                            </div>
+                            <div class="related-info">
+                                <p class="related-number">ERK9988W + SAD428X</p>
+                                <p class="related-spec">20Wタイプ W:190 L:600</p>
+                                <p class="related-price">¥34,700</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ランプ選択モーダル -->
+    <div class="modal-overlay" id="lampModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">適合ランプを選択</h3>
+                <button class="modal-close" onclick="closeLampModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- フィルター -->
+                <div class="lamp-filter-row">
+                    <span class="lamp-filter-chip active">すべて</span>
+                    <span class="lamp-filter-chip">電球色 3000K</span>
+                    <span class="lamp-filter-chip">温白色 3500K</span>
+                    <span class="lamp-filter-chip">白色 4000K</span>
+                    <span class="lamp-filter-chip">昼白色 5000K</span>
+                    <span class="lamp-filter-chip">調色タイプ</span>
+                </div>
+
+                <!-- ランプグリッド -->
+                <div class="lamp-grid">
+                    <div class="lamp-option selected" onclick="selectLamp(this)">
+                        <div class="lamp-option-header">
+                            <div class="lamp-color-dot" style="background: linear-gradient(135deg, #fff, #f5f5f5);"></div>
+                            <div class="lamp-option-check">✓</div>
+                        </div>
+                        <div class="lamp-option-name">40Wタイプ専用ユニット 昼白色</div>
+                        <div class="lamp-option-model">SAD423X（5000K）</div>
+                        <div class="lamp-option-specs">
+                            <span class="lamp-option-spec">49.0W</span>
+                            <span class="lamp-option-spec">6900lm</span>
+                            <span class="lamp-option-spec">Ra92</span>
+                        </div>
+                        <div class="lamp-option-price">¥38,500</div>
+                    </div>
+
+                    <div class="lamp-option" onclick="selectLamp(this)">
+                        <div class="lamp-option-header">
+                            <div class="lamp-color-dot" style="background: linear-gradient(135deg, #fff8e1, #ffe0b2);"></div>
+                            <div class="lamp-option-check">✓</div>
+                        </div>
+                        <div class="lamp-option-name">40Wタイプ専用ユニット 白色</div>
+                        <div class="lamp-option-model">SAD423W（4000K）</div>
+                        <div class="lamp-option-specs">
+                            <span class="lamp-option-spec">49.0W</span>
+                            <span class="lamp-option-spec">6900lm</span>
+                            <span class="lamp-option-spec">Ra92</span>
+                        </div>
+                        <div class="lamp-option-price">¥38,500</div>
+                    </div>
+
+                    <div class="lamp-option" onclick="selectLamp(this)">
+                        <div class="lamp-option-header">
+                            <div class="lamp-color-dot" style="background: linear-gradient(135deg, #ffe0b2, #ffcc80);"></div>
+                            <div class="lamp-option-check">✓</div>
+                        </div>
+                        <div class="lamp-option-name">40Wタイプ専用ユニット 温白色</div>
+                        <div class="lamp-option-model">SAD423WW（3500K）</div>
+                        <div class="lamp-option-specs">
+                            <span class="lamp-option-spec">49.0W</span>
+                            <span class="lamp-option-spec">6700lm</span>
+                            <span class="lamp-option-spec">Ra92</span>
+                        </div>
+                        <div class="lamp-option-price">¥38,500</div>
+                    </div>
+
+                    <div class="lamp-option" onclick="selectLamp(this)">
+                        <div class="lamp-option-header">
+                            <div class="lamp-color-dot" style="background: linear-gradient(135deg, #ffcc80, #ffa726);"></div>
+                            <div class="lamp-option-check">✓</div>
+                        </div>
+                        <div class="lamp-option-name">40Wタイプ専用ユニット 電球色</div>
+                        <div class="lamp-option-model">SAD423L（3000K）</div>
+                        <div class="lamp-option-specs">
+                            <span class="lamp-option-spec">49.0W</span>
+                            <span class="lamp-option-spec">6200lm</span>
+                            <span class="lamp-option-spec">Ra92</span>
+                        </div>
+                        <div class="lamp-option-price">¥38,500</div>
+                    </div>
+
+                    <div class="lamp-option" onclick="selectLamp(this)">
+                        <div class="lamp-option-header">
+                            <div class="lamp-color-dot" style="background: linear-gradient(90deg, #ffcc80, #fff);"></div>
+                            <div class="lamp-option-check">✓</div>
+                        </div>
+                        <div class="lamp-option-name">40Wタイプ専用ユニット 調色タイプ</div>
+                        <div class="lamp-option-model">SAD423X-T（12000K-1800K）</div>
+                        <div class="lamp-option-specs">
+                            <span class="lamp-option-spec">49.0W</span>
+                            <span class="lamp-option-spec">調色対応</span>
+                        </div>
+                        <div class="lamp-option-price">¥45,000</div>
+                    </div>
+
+                    <div class="lamp-option" onclick="selectLamp(this)">
+                        <div class="lamp-option-header">
+                            <div class="lamp-color-dot" style="background: linear-gradient(135deg, #fff, #f5f5f5);"></div>
+                            <div class="lamp-option-check">✓</div>
+                        </div>
+                        <div class="lamp-option-name">40Wタイプ専用ユニット 高出力</div>
+                        <div class="lamp-option-model">SAD423X-H（5000K）</div>
+                        <div class="lamp-option-specs">
+                            <span class="lamp-option-spec">49.0W</span>
+                            <span class="lamp-option-spec">7500lm</span>
+                            <span class="lamp-option-spec">Ra92</span>
+                        </div>
+                        <div class="lamp-option-price">¥42,000</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn" onclick="closeLampModal()">キャンセル</button>
+                <button class="action-btn action-btn-primary" onclick="confirmLamp()">この組み合わせで決定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-bottom">
+                <p>&copy; 2026 ENDO LIGHTING CORP. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // 画像切り替え
+        function changeImage(src, thumb) {
+            document.querySelector('#mainImage img').src = src;
+            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        }
+
+        // モーダル開閉
+        function openLampModal() {
+            document.getElementById('lampModal').classList.add('active');
+        }
+
+        function closeLampModal() {
+            document.getElementById('lampModal').classList.remove('active');
+        }
+
+        // ランプ選択
+        function selectLamp(el) {
+            document.querySelectorAll('.lamp-option').forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function confirmLamp() {
+            closeLampModal();
+            // TODO: 選択したランプ情報を反映
+        }
+
+        // フィルターチップ
+        document.querySelectorAll('.lamp-filter-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                document.querySelectorAll('.lamp-filter-chip').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // モーダル外クリックで閉じる
+        document.getElementById('lampModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLampModal();
+            }
+        });
+    </script>
+</body>
+</html>

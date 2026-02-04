@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コストシミュレーション | ENDO LIGHTING JOBサポート</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-text">ENDO</span>
+                    <span class="logo-sub">LIGHTING CORP.</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="search.html">製品を探す</a></li>
+                    <li class="nav-item"><a href="design-support.html">設計サポート</a></li>
+                    <li class="nav-item"><a href="tools.html" class="active">提案ツール</a></li>
+                    <li class="nav-item"><a href="#">事例・サポート</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="btn-contact">お問い合わせ</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="メニュー">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main-content">
+        <div class="page-header">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="index.html">ホーム</a> &gt; <a href="tools.html">提案ツール</a> &gt; <span>コストシミュレーション</span>
+                </nav>
+                <h1 class="page-title">コストシミュレーション</h1>
+                <p class="page-description">既存照明と提案照明のコストを比較し、削減効果を可視化します</p>
+            </div>
+        </div>
+
+        <div class="simulation-page">
+            <div class="container">
+                <!-- 状態切り替え（デモ用） -->
+                <div class="state-tabs">
+                    <button class="state-tab" data-state="step1">Step1: 入力前</button>
+                    <button class="state-tab" data-state="step2">Step2: 入力中</button>
+                    <button class="state-tab active" data-state="step3">Step3: 結果表示</button>
+                </div>
+
+                <!-- ステップインジケーター -->
+                <div class="step-indicator">
+                    <div class="step completed">
+                        <span class="step-number">✓</span>
+                        <span class="step-label">器具入力</span>
+                    </div>
+                    <div class="step-line step-line-completed"></div>
+                    <div class="step completed">
+                        <span class="step-number">✓</span>
+                        <span class="step-label">条件設定</span>
+                    </div>
+                    <div class="step-line step-line-completed"></div>
+                    <div class="step active">
+                        <span class="step-number">3</span>
+                        <span class="step-label">結果確認</span>
+                    </div>
+                </div>
+
+                <div class="simulation-content">
+                    <!-- 入力エリア -->
+                    <div class="simulation-input">
+                        <div class="input-panel">
+                            <div class="panel-header">
+                                <h3>既存照明</h3>
+                                <span class="panel-badge">現状</span>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label>品番（既存）</label>
+                                    <div class="input-with-btn">
+                                        <input type="text" placeholder="例：FHF32W×2灯" class="form-input">
+                                        <button class="btn btn-sm btn-outline">検索</button>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group half">
+                                        <label>台数</label>
+                                        <input type="number" value="100" class="form-input">
+                                    </div>
+                                    <div class="form-group half">
+                                        <label>消費電力</label>
+                                        <div class="input-unit">
+                                            <input type="number" value="76" class="form-input">
+                                            <span>W</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>器具単価</label>
+                                    <div class="input-unit">
+                                        <input type="number" value="15000" class="form-input">
+                                        <span>円</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-panel input-panel-highlight">
+                            <div class="panel-header">
+                                <h3>提案照明</h3>
+                                <span class="panel-badge panel-badge-primary">提案</span>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label>品番（提案）</label>
+                                    <div class="input-with-btn">
+                                        <input type="text" placeholder="例：ERK9585W+FAD755N" class="form-input">
+                                        <button class="btn btn-sm btn-primary">製品検索</button>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group half">
+                                        <label>台数</label>
+                                        <input type="number" value="80" class="form-input">
+                                    </div>
+                                    <div class="form-group half">
+                                        <label>消費電力</label>
+                                        <div class="input-unit">
+                                            <input type="number" value="32" class="form-input">
+                                            <span>W</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>器具単価</label>
+                                    <div class="input-unit">
+                                        <input type="number" value="22000" class="form-input">
+                                        <span>円</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 条件設定 -->
+                    <div class="condition-panel">
+                        <h3>計算条件</h3>
+                        <div class="condition-grid">
+                            <div class="form-group">
+                                <label>点灯時間</label>
+                                <div class="input-unit">
+                                    <input type="number" value="12" class="form-input">
+                                    <span>時間/日</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>年間稼働日数</label>
+                                <div class="input-unit">
+                                    <input type="number" value="250" class="form-input">
+                                    <span>日</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>電気料金単価</label>
+                                <div class="input-unit">
+                                    <input type="number" value="27" class="form-input">
+                                    <span>円/kWh</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>計算期間</label>
+                                <div class="input-unit">
+                                    <input type="number" value="10" class="form-input">
+                                    <span>年</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="condition-actions">
+                            <button class="btn btn-primary btn-lg">シミュレーション実行</button>
+                        </div>
+                    </div>
+
+                    <!-- 結果表示 -->
+                    <div class="result-panel">
+                        <h3>シミュレーション結果</h3>
+
+                        <!-- サマリーカード -->
+                        <div class="result-summary">
+                            <div class="summary-card summary-card-highlight">
+                                <p class="summary-label">年間削減額</p>
+                                <p class="summary-value">¥<span class="highlight-number">486,000</span></p>
+                                <p class="summary-sub">電気代 66%削減</p>
+                            </div>
+                            <div class="summary-card">
+                                <p class="summary-label">イニシャルコスト差</p>
+                                <p class="summary-value">+¥260,000</p>
+                                <p class="summary-sub">提案照明の初期投資増</p>
+                            </div>
+                            <div class="summary-card summary-card-success">
+                                <p class="summary-label">投資回収期間</p>
+                                <p class="summary-value"><span class="highlight-number">0.5</span>年</p>
+                                <p class="summary-sub">約6ヶ月で回収</p>
+                            </div>
+                            <div class="summary-card">
+                                <p class="summary-label">10年間累計削減</p>
+                                <p class="summary-value">¥<span class="highlight-number">4,600,000</span></p>
+                                <p class="summary-sub">CO2削減: 約45t</p>
+                            </div>
+                        </div>
+
+                        <!-- グラフエリア -->
+                        <div class="result-charts">
+                            <div class="chart-container">
+                                <h4>年間電気代比較</h4>
+                                <div class="chart-placeholder">
+                                    <div class="bar-chart">
+                                        <div class="bar-group">
+                                            <div class="bar-label">既存</div>
+                                            <div class="bar bar-existing" style="width: 100%;">
+                                                <span>¥729,000</span>
+                                            </div>
+                                        </div>
+                                        <div class="bar-group">
+                                            <div class="bar-label">提案</div>
+                                            <div class="bar bar-proposed" style="width: 33%;">
+                                                <span>¥243,000</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <h4>累計コスト推移（10年）</h4>
+                                <div class="chart-placeholder">
+                                    <div class="line-chart-placeholder">
+                                        <!-- 簡易的な折れ線グラフ表現 -->
+                                        <svg viewBox="0 0 400 200" class="line-chart-svg">
+                                            <line x1="50" y1="180" x2="380" y2="180" stroke="#ddd" stroke-width="1"/>
+                                            <line x1="50" y1="20" x2="50" y2="180" stroke="#ddd" stroke-width="1"/>
+                                            <!-- 既存ライン -->
+                                            <polyline points="50,160 100,140 150,120 200,100 250,80 300,60 350,40" fill="none" stroke="#dc3545" stroke-width="3"/>
+                                            <!-- 提案ライン -->
+                                            <polyline points="50,150 100,145 150,140 200,135 250,130 300,125 350,120" fill="none" stroke="#0066cc" stroke-width="3"/>
+                                            <!-- 凡例 -->
+                                            <text x="280" y="50" fill="#dc3545" font-size="12">既存</text>
+                                            <text x="280" y="130" fill="#0066cc" font-size="12">提案</text>
+                                        </svg>
+                                        <p class="chart-note">※グラフはイメージです</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 詳細テーブル -->
+                        <div class="result-detail">
+                            <h4>詳細比較</h4>
+                            <table class="detail-table">
+                                <thead>
+                                    <tr>
+                                        <th>項目</th>
+                                        <th>既存照明</th>
+                                        <th>提案照明</th>
+                                        <th>差額</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>器具代</td>
+                                        <td>¥1,500,000</td>
+                                        <td>¥1,760,000</td>
+                                        <td class="negative">+¥260,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>総消費電力</td>
+                                        <td>7,600W</td>
+                                        <td>2,560W</td>
+                                        <td class="positive">-5,040W</td>
+                                    </tr>
+                                    <tr>
+                                        <td>年間電気代</td>
+                                        <td>¥729,000</td>
+                                        <td>¥243,000</td>
+                                        <td class="positive">-¥486,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10年間総コスト</td>
+                                        <td>¥8,790,000</td>
+                                        <td>¥4,190,000</td>
+                                        <td class="positive highlight">-¥4,600,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- アクション -->
+                        <div class="result-actions">
+                            <button class="btn btn-outline">条件を変更</button>
+                            <button class="btn btn-outline">結果をコピー</button>
+                            <a href="proposal-preview.html" class="btn btn-primary">提案書としてダウンロード</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-bottom">
+                <p>&copy; 2026 ENDO LIGHTING CORP. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

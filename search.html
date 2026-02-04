@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>製品検索 | ENDO LIGHTING JOBサポート</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-text">ENDO</span>
+                    <span class="logo-sub">LIGHTING CORP.</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="search.html" class="active">製品を探す</a></li>
+                    <li class="nav-item"><a href="design-support.html">設計サポート</a></li>
+                    <li class="nav-item"><a href="tools.html">提案ツール</a></li>
+                    <li class="nav-item"><a href="#">事例・サポート</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="btn-contact">お問い合わせ</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="メニュー">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main-content">
+        <div class="page-header">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="index.html">ホーム</a> &gt; <span>製品を探す</span>
+                </nav>
+                <h1 class="page-title">製品を探す</h1>
+            </div>
+        </div>
+
+        <div class="search-page">
+            <div class="container">
+                <!-- 検索タブ -->
+                <div class="search-tabs">
+                    <button class="tab-btn active" data-tab="category">カテゴリから探す</button>
+                    <button class="tab-btn" data-tab="hinban">品番から探す</button>
+                    <a href="successor-search.html" class="tab-btn" data-tab="successor">後継品・代替品検索</a>
+                </div>
+
+                <div class="search-content">
+                    <!-- サイドフィルター -->
+                    <aside class="search-sidebar">
+                        <div class="filter-section">
+                            <h3 class="filter-title">絞り込み</h3>
+
+                            <div class="filter-group">
+                                <h4>カテゴリ</h4>
+                                <ul class="filter-list">
+                                    <li><label><input type="checkbox"> ダウンライト <span class="count">(324)</span></label></li>
+                                    <li><label><input type="checkbox"> スポットライト <span class="count">(256)</span></label></li>
+                                    <li><label><input type="checkbox"> ベースライト <span class="count">(198)</span></label></li>
+                                    <li><label><input type="checkbox"> ブラケット <span class="count">(167)</span></label></li>
+                                    <li><label><input type="checkbox"> ペンダント <span class="count">(89)</span></label></li>
+                                    <li><label><input type="checkbox"> 屋外照明 <span class="count">(145)</span></label></li>
+                                </ul>
+                            </div>
+
+                            <div class="filter-group">
+                                <h4>設置場所</h4>
+                                <ul class="filter-list">
+                                    <li><label><input type="checkbox"> 屋内</label></li>
+                                    <li><label><input type="checkbox"> 屋外</label></li>
+                                    <li><label><input type="checkbox"> 軒下</label></li>
+                                </ul>
+                            </div>
+
+                            <div class="filter-group">
+                                <h4>光色</h4>
+                                <ul class="filter-list">
+                                    <li><label><input type="checkbox"> 電球色 (2700K)</label></li>
+                                    <li><label><input type="checkbox"> 温白色 (3500K)</label></li>
+                                    <li><label><input type="checkbox"> 白色 (4000K)</label></li>
+                                    <li><label><input type="checkbox"> 昼白色 (5000K)</label></li>
+                                </ul>
+                            </div>
+
+                            <div class="filter-group">
+                                <h4>調光</h4>
+                                <ul class="filter-list">
+                                    <li><label><input type="checkbox"> 調光対応</label></li>
+                                    <li><label><input type="checkbox"> 非調光</label></li>
+                                </ul>
+                            </div>
+
+                            <button class="btn btn-filter-clear">絞り込みをクリア</button>
+                        </div>
+                    </aside>
+
+                    <!-- 検索結果 -->
+                    <div class="search-results">
+                        <!-- 検索バー -->
+                        <div class="search-bar">
+                            <input type="text" placeholder="品番・キーワードで検索（例：ERD6001W）" class="search-input-large">
+                            <button class="btn btn-primary">検索</button>
+                        </div>
+
+                        <!-- 結果ヘッダー -->
+                        <div class="results-header">
+                            <p class="results-count"><strong>1,234</strong> 件の製品が見つかりました</p>
+                            <div class="results-actions">
+                                <div class="view-toggle">
+                                    <button class="view-btn active" data-view="grid">グリッド</button>
+                                    <button class="view-btn" data-view="list">リスト</button>
+                                </div>
+                                <select class="sort-select">
+                                    <option>新着順</option>
+                                    <option>品番順</option>
+                                    <option>価格順</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 製品グリッド -->
+                        <div class="product-grid">
+                            <div class="product-card">
+                                <div class="product-checkbox">
+                                    <input type="checkbox" id="product1">
+                                    <label for="product1">比較に追加</label>
+                                </div>
+                                <div class="product-image">
+                                    <img src="images/ERK9985W_SAD423X-K.jpg" alt="ERK9985W" style="width:100%; height:120px; object-fit:cover;">
+                                </div>
+                                <div class="product-info">
+                                    <p class="product-category">ベースライト / 埋込W:300</p>
+                                    <h3 class="product-name">ERK9985W + SAD423X</h3>
+                                    <p class="product-spec">40Wタイプ 49.0W 6900lm Ra92</p>
+                                    <p class="product-price">¥49,100</p>
+                                </div>
+                                <div class="product-actions">
+                                    <a href="product-detail-v3.html" class="btn btn-sm btn-outline">詳細</a>
+                                    <a href="#" class="btn btn-sm btn-primary">仕様図DL</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card">
+                                <div class="product-checkbox">
+                                    <input type="checkbox" id="product2">
+                                    <label for="product2">比較に追加</label>
+                                </div>
+                                <div class="product-image">
+                                    <img src="images/ERK9986W_SAD428X-K.jpg" alt="ERK9986W" style="width:100%; height:120px; object-fit:cover;">
+                                </div>
+                                <div class="product-info">
+                                    <p class="product-category">ベースライト / 埋込W:300 L:600</p>
+                                    <h3 class="product-name">ERK9986W + SAD428X</h3>
+                                    <p class="product-spec">20Wタイプ 26.1W 3385lm Ra92</p>
+                                    <p class="product-price">¥35,800</p>
+                                </div>
+                                <div class="product-actions">
+                                    <a href="product-detail-v3.html" class="btn btn-sm btn-outline">詳細</a>
+                                    <a href="#" class="btn btn-sm btn-primary">仕様図DL</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card">
+                                <div class="product-checkbox">
+                                    <input type="checkbox" id="product3">
+                                    <label for="product3">比較に追加</label>
+                                </div>
+                                <div class="product-image">
+                                    <img src="images/ERK9987W_SAD423X-K.jpg" alt="ERK9987W" style="width:100%; height:120px; object-fit:cover;">
+                                </div>
+                                <div class="product-info">
+                                    <p class="product-category">ベースライト / 埋込W:190</p>
+                                    <h3 class="product-name">ERK9987W + SAD423X</h3>
+                                    <p class="product-spec">40Wタイプ 49.0W 6763lm Ra92</p>
+                                    <p class="product-price">¥48,100</p>
+                                </div>
+                                <div class="product-actions">
+                                    <a href="product-detail-v3.html" class="btn btn-sm btn-outline">詳細</a>
+                                    <a href="#" class="btn btn-sm btn-primary">仕様図DL</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card">
+                                <div class="product-checkbox">
+                                    <input type="checkbox" id="product4">
+                                    <label for="product4">比較に追加</label>
+                                </div>
+                                <div class="product-image">
+                                    <img src="images/ERK9988W_SAD428X-K.jpg" alt="ERK9988W" style="width:100%; height:120px; object-fit:cover;">
+                                </div>
+                                <div class="product-info">
+                                    <p class="product-category">ベースライト / 埋込W:190 L:600</p>
+                                    <h3 class="product-name">ERK9988W + SAD428X</h3>
+                                    <p class="product-spec">20Wタイプ 26.1W 3381lm Ra92</p>
+                                    <p class="product-price">¥34,700</p>
+                                </div>
+                                <div class="product-actions">
+                                    <a href="product-detail-v3.html" class="btn btn-sm btn-outline">詳細</a>
+                                    <a href="#" class="btn btn-sm btn-primary">仕様図DL</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card">
+                                <div class="product-checkbox">
+                                    <input type="checkbox" id="product5">
+                                    <label for="product5">比較に追加</label>
+                                </div>
+                                <div class="product-image">
+                                    <img src="images/ERK9985W_SAD423X-K.jpg" alt="ERK9985W本体" style="width:100%; height:120px; object-fit:cover;">
+                                </div>
+                                <div class="product-info">
+                                    <p class="product-category">ベースライト / 本体のみ</p>
+                                    <h3 class="product-name">ERK9985W（ランプ別売）</h3>
+                                    <p class="product-spec">40Wタイプ用 W300×1257</p>
+                                    <p class="product-price">¥10,600</p>
+                                </div>
+                                <div class="product-actions">
+                                    <a href="product-detail-v3.html" class="btn btn-sm btn-outline">詳細</a>
+                                    <a href="#" class="btn btn-sm btn-primary">仕様図DL</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card">
+                                <div class="product-checkbox">
+                                    <input type="checkbox" id="product6">
+                                    <label for="product6">比較に追加</label>
+                                </div>
+                                <div class="product-image">
+                                    <img src="images/ERK9987W_SAD423X-K.jpg" alt="ERK9987W本体" style="width:100%; height:120px; object-fit:cover;">
+                                </div>
+                                <div class="product-info">
+                                    <p class="product-category">ベースライト / 本体のみ</p>
+                                    <h3 class="product-name">ERK9987W（ランプ別売）</h3>
+                                    <p class="product-spec">40Wタイプ用 W190×1257</p>
+                                    <p class="product-price">¥9,600</p>
+                                </div>
+                                <div class="product-actions">
+                                    <a href="product-detail-v3.html" class="btn btn-sm btn-outline">詳細</a>
+                                    <a href="#" class="btn btn-sm btn-primary">仕様図DL</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 比較バー -->
+                        <div class="compare-bar">
+                            <div class="compare-bar-inner">
+                                <p><strong>2</strong> 件の製品を選択中</p>
+                                <a href="compare.html" class="btn btn-primary">製品を比較する</a>
+                            </div>
+                        </div>
+
+                        <!-- ページネーション -->
+                        <div class="pagination">
+                            <a href="#" class="page-link">&laquo;</a>
+                            <a href="#" class="page-link active">1</a>
+                            <a href="#" class="page-link">2</a>
+                            <a href="#" class="page-link">3</a>
+                            <span class="page-dots">...</span>
+                            <a href="#" class="page-link">42</a>
+                            <a href="#" class="page-link">&raquo;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-bottom">
+                <p>&copy; 2026 ENDO LIGHTING CORP. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
