@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AKGNET AI Analytics - ルミナテック マーケットインテリジェンス</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #e0e0e0;
+    min-height: 100vh;
+  }
+  .header {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header h1 {
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 2px;
+  }
+  .header h1 span { color: #64ffda; font-weight: 600; }
+  .header .meta {
+    font-size: 12px;
+    color: #999;
+    text-align: right;
+  }
+  .container { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
+
+  /* KPI Cards */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .kpi-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .kpi-card:hover { transform: translateY(-3px); }
+  .kpi-value { font-size: 32px; font-weight: 700; color: #64ffda; }
+  .kpi-label { font-size: 12px; color: #aaa; margin-top: 4px; }
+  .kpi-sub { font-size: 11px; color: #666; margin-top: 2px; }
+
+  /* Chart Grid */
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  .chart-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .chart-card.full-width { grid-column: 1 / -1; }
+  .chart-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #fff;
+  }
+  .chart-subtitle {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 16px;
+  }
+  .chart-container { position: relative; width: 100%; height: 350px; }
+  .full-width .chart-container { height: 400px; }
+
+  /* Insight Cards */
+  .insights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .insight-card {
+    background: linear-gradient(135deg, rgba(100,255,218,0.08), rgba(100,255,218,0.02));
+    border: 1px solid rgba(100,255,218,0.2);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .insight-card h3 {
+    font-size: 14px;
+    color: #64ffda;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .insight-card p { font-size: 13px; line-height: 1.6; color: #ccc; }
+  .insight-card .highlight { color: #64ffda; font-weight: 600; }
+
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    color: #555;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  @media (max-width: 768px) {
+    .chart-grid { grid-template-columns: 1fr; }
+    .header { flex-direction: column; gap: 10px; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span>AKGNET</span> AI Analytics</h1>
+  <div class="meta">
+    ルミナテック マーケットインテリジェンス ダッシュボード<br>
+    データ: 製品4,062点 + 住宅着工統計 2020-2024<br>
+    生成日: 2026-02-13 | BigQuery + Claude AI
+  </div>
+</div>
+
+<div class="container">
+
+<!-- KPI Row -->
+<div class="kpi-row">
+  <div class="kpi-card">
+    <div class="kpi-value">4,062</div>
+    <div class="kpi-label">分析対象製品数</div>
+    <div class="kpi-sub">14カテゴリを網羅</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value">91.3</div>
+    <div class="kpi-label">最高効率 (lm/W)</div>
+    <div class="kpi-sub">DWカテゴリ（ダウンライト）</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value">91.7%</div>
+    <div class="kpi-label">Ra90以上の製品比率</div>
+    <div class="kpi-sub">高演色性能</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value">4,515<span style="font-size:16px">億円</span></div>
+    <div class="kpi-label">照明市場規模（推計）</div>
+    <div class="kpi-sub">2024年 住宅着工ベース</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value">-3.4%</div>
+    <div class="kpi-label">住宅着工 前年比</div>
+    <div class="kpi-sub">2024年 vs 2023年</div>
+  </div>
+</div>
+
+<!-- Charts Row 1 -->
+<div class="chart-grid">
+  <div class="chart-card">
+    <div class="chart-title">カテゴリ別 製品ポートフォリオ</div>
+    <div class="chart-subtitle">カテゴリごとの製品数と平均価格</div>
+    <div class="chart-container"><canvas id="portfolioChart"></canvas></div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">効率 vs 価格（コストパフォーマンス分析）</div>
+    <div class="chart-subtitle">バブルサイズ = 製品数</div>
+    <div class="chart-container"><canvas id="efficiencyChart"></canvas></div>
+  </div>
+</div>
+
+<!-- Charts Row 2 -->
+<div class="chart-grid">
+  <div class="chart-card">
+    <div class="chart-title">カテゴリ別 価格帯分布</div>
+    <div class="chart-subtitle">価格帯ごとの製品セグメント</div>
+    <div class="chart-container"><canvas id="priceDistChart"></canvas></div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">色温度タイプ別 製品構成</div>
+    <div class="chart-subtitle">色温度タイプごとの製品比率</div>
+    <div class="chart-container"><canvas id="colorTempChart"></canvas></div>
+  </div>
+</div>
+
+<!-- Charts Row 3 -->
+<div class="chart-grid">
+  <div class="chart-card">
+    <div class="chart-title">カテゴリ別 調光対応率</div>
+    <div class="chart-subtitle">スマートホーム対応度の可視化</div>
+    <div class="chart-container"><canvas id="dimmingChart"></canvas></div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">Ra値（演色性）分布</div>
+    <div class="chart-subtitle">製品全体の演色性品質</div>
+    <div class="chart-container"><canvas id="raChart"></canvas></div>
+  </div>
+</div>
+
+<!-- Charts Row 4 - Full Width -->
+<div class="chart-grid">
+  <div class="chart-card full-width">
+    <div class="chart-title">住宅着工数推移 と 照明市場規模推計</div>
+    <div class="chart-subtitle">月次の新設住宅着工戸数（2022-2024年）と照明市場規模の推定</div>
+    <div class="chart-container"><canvas id="housingChart"></canvas></div>
+  </div>
+</div>
+
+<!-- Charts Row 5 -->
+<div class="chart-grid">
+  <div class="chart-card">
+    <div class="chart-title">セグメント別 年間市場規模</div>
+    <div class="chart-subtitle">住宅着工統計からの照明市場推計</div>
+    <div class="chart-container"><canvas id="marketSegmentChart"></canvas></div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">住宅タイプ別 着工数推移</div>
+    <div class="chart-subtitle">持家・貸家・分譲の年次推移</div>
+    <div class="chart-container"><canvas id="housingTypeChart"></canvas></div>
+  </div>
+</div>
+
+<!-- AI Insights -->
+<h2 style="font-size:20px; margin-bottom:16px; color:#64ffda;">AI分析インサイト</h2>
+<div class="insights">
+  <div class="insight-card">
+    <h3>1. DWシリーズ：効率No.1</h3>
+    <p>DW（ダウンライト）は平均<span class="highlight">91.3 lm/W</span>の最高効率を、平均<span class="highlight">14,580円</span>という低価格で実現。1,085製品を擁するルミナテックの主力カテゴリであり、コストパフォーマンスで全カテゴリ中トップ。</p>
+  </div>
+  <div class="insight-card">
+    <h3>2. プレミアムセグメントの成長余地</h3>
+    <p>CH（シャンデリア・ペンダント）は平均<span class="highlight">209,158円</span>、効率88.0 lm/W。製品数は全体の6%に留まるが、<span class="highlight">売上構成比は30%超</span>と推定。市場縮小下でも高単価セグメントは耐性あり。</p>
+  </div>
+  <div class="insight-card">
+    <h3>3. スマートホーム対応：調光100%</h3>
+    <p>PLMとSLMカテゴリは<span class="highlight">全1,424製品が調光対応</span>。さらに調色対応（電球色〜昼光色）が全体の8.5%を占め、スマートホーム市場への対応準備が着実に進行中。</p>
+  </div>
+  <div class="insight-card">
+    <h3>4. 市場縮小への警鐘</h3>
+    <p>住宅着工戸数は<span class="highlight">86.1万戸（2022年）→79.2万戸（2024年）</span>と2年で8%減少。照明市場規模は推計4,901億円→4,515億円に縮小。特に持家は<span class="highlight">2020年比-17%</span>と最も深刻。</p>
+  </div>
+  <div class="insight-card">
+    <h3>5. 高演色が圧倒的な差別化要因</h3>
+    <p>計測対象製品の<span class="highlight">91.7%がRa90以上</span>。市場標準のRa80を大きく上回り、コモディティ照明との明確な差別化ポイント。プレミアムポジショニングを数値で裏付け。</p>
+  </div>
+  <div class="insight-card">
+    <h3>6. 電球色が主流、しかし変化の兆し</h3>
+    <p>電球色（2700K）が<span class="highlight">全体の40.8%</span>を占め、日本の住宅照明の嗜好を反映。一方で調色対応（8.5%）や昼白色（24.8%）も増加しており、今後は柔軟な色温度対応が鍵に。</p>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  AKGNET AI Analytics | データソース: ルミナテック製品カタログ（4,062 SKU）+ 国土交通省 住宅着工統計（2020-2024年）<br>
+  分析基盤: Google BigQuery + Claude AI | &copy; 2026 AKGNET
+</div>
+
+<script>
+// Chart.js グローバル設定
+Chart.defaults.color = '#aaa';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.08)';
+Chart.defaults.font.family = "'Segoe UI', 'Hiragino Sans', sans-serif";
+Chart.defaults.animation = { duration: 800 };
+Chart.defaults.responsive = true;
+Chart.defaults.maintainAspectRatio = false;
+
+const palette = ['#64ffda','#ff6b9d','#c084fc','#fbbf24','#60a5fa','#34d399','#f472b6','#a78bfa','#fb923c','#4ade80'];
+
+// 1. カテゴリ別ポートフォリオ
+new Chart(document.getElementById('portfolioChart'), {
+  type: 'bar',
+  data: {
+    labels: ['PLM','DW','BK','AX','SLM','CH','NX','LN','FX','CP','SP','TB'],
+    datasets: [{
+      label: '製品数',
+      data: [1089,1085,552,352,335,245,187,95,58,31,14,10],
+      backgroundColor: palette[0] + '80',
+      borderColor: palette[0],
+      borderWidth: 1,
+      yAxisID: 'y'
+    },{
+      label: '平均価格（円）',
+      data: [31008,14580,23383,15308,42224,209158,null,4563,140943,19158,450000,55800],
+      type: 'line',
+      borderColor: palette[1],
+      pointBackgroundColor: palette[1],
+      pointRadius: 5,
+      yAxisID: 'y1',
+      tension: 0.3
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: '製品数' } },
+      y1: { position: 'right', beginAtZero: true, title: { display: true, text: '平均価格（円）' }, grid: { drawOnChartArea: false } }
+    }
+  }
+});
+
+// 2. 効率 vs 価格 バブルチャート
+new Chart(document.getElementById('efficiencyChart'), {
+  type: 'bubble',
+  data: {
+    datasets: [
+      { label:'DW', data:[{x:14862,y:91.3,r:25}], backgroundColor:'rgba(100,255,218,0.6)' },
+      { label:'CH', data:[{x:209158,y:88.0,r:12}], backgroundColor:'rgba(255,107,157,0.6)' },
+      { label:'BK', data:[{x:23481,y:73.9,r:18}], backgroundColor:'rgba(192,132,252,0.6)' },
+      { label:'PLM', data:[{x:31008,y:73.8,r:25}], backgroundColor:'rgba(251,191,36,0.6)' },
+      { label:'TB', data:[{x:55800,y:77.8,r:5}], backgroundColor:'rgba(96,165,250,0.6)' },
+      { label:'SLM', data:[{x:42224,y:51.6,r:14}], backgroundColor:'rgba(52,211,153,0.6)' },
+      { label:'FX', data:[{x:140943,y:38.5,r:8}], backgroundColor:'rgba(244,114,182,0.6)' },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'right' },
+      tooltip: {
+        callbacks: {
+          label: ctx => `${ctx.dataset.label}: 価格 ${ctx.raw.x.toLocaleString()}円, 効率 ${ctx.raw.y} lm/W`
+        }
+      }
+    },
+    scales: {
+      x: { title: { display: true, text: '平均価格（円）' }, type: 'logarithmic',
+        ticks: { callback: v => v >= 10000 ? (v/10000)+'万' : v >= 1000 ? (v/1000)+'K' : v }
+      },
+      y: { title: { display: true, text: 'エネルギー効率 (lm/W)' }, beginAtZero: true }
+    }
+  }
+});
+
+// 3. 価格帯分布
+const priceCategories = ['DW','BK','PLM','AX','SLM','CH','FX'];
+new Chart(document.getElementById('priceDistChart'), {
+  type: 'bar',
+  data: {
+    labels: priceCategories,
+    datasets: [
+      { label: '1万円未満', data: [364,40,0,167,0,0,0], backgroundColor: '#64ffda' },
+      { label: '1〜3万円', data: [669,413,399,136,65,0,0], backgroundColor: '#60a5fa' },
+      { label: '3〜10万円', data: [52,98,690,46,270,68,20], backgroundColor: '#c084fc' },
+      { label: '10万円以上', data: [0,1,0,2,0,177,36], backgroundColor: '#ff6b9d' },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      x: { stacked: true },
+      y: { stacked: true, title: { display: true, text: '製品数' } }
+    }
+  }
+});
+
+// 4. 色温度タイプ ドーナツ
+new Chart(document.getElementById('colorTempChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['電球色 (2700K)','昼白色 (5000K)','温白色 (3500K)','調色対応','白色 (4000K)','RGBカラー','その他'],
+    datasets: [{
+      data: [1371, 834, 455, 310, 231, 56, 105],
+      backgroundColor: ['#fbbf24','#60a5fa','#fb923c','#c084fc','#34d399','#ff6b9d','#64748b'],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'right', labels: { font: { size: 11 } } },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const total = ctx.dataset.data.reduce((a,b) => a+b, 0);
+            return `${ctx.label}: ${ctx.raw}製品 (${(ctx.raw/total*100).toFixed(1)}%)`;
+          }
+        }
+      }
+    }
+  }
+});
+
+// 5. 調光対応率
+new Chart(document.getElementById('dimmingChart'), {
+  type: 'bar',
+  data: {
+    labels: ['PLM','DW','BK','AX','SLM','CH'],
+    datasets: [
+      { label: '調光対応', data: [1089,566,184,39,335,164], backgroundColor: '#64ffda' },
+      { label: '調光非対応', data: [0,412,212,9,0,72], backgroundColor: '#ff6b9d80' },
+      { label: '不明', data: [0,107,156,304,0,9], backgroundColor: '#64748b60' },
+    ]
+  },
+  options: {
+    responsive: true,
+    indexAxis: 'y',
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      x: { stacked: true, title: { display: true, text: '製品数' } },
+      y: { stacked: true }
+    }
+  }
+});
+
+// 6. Ra値分布
+new Chart(document.getElementById('raChart'), {
+  type: 'pie',
+  data: {
+    labels: ['Ra90以上（高演色）', 'Ra80〜89（標準）', 'Ra70〜79（低演色）'],
+    datasets: [{
+      data: [3009, 270, 3],
+      backgroundColor: ['#64ffda', '#60a5fa', '#ff6b9d'],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'right' },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const total = ctx.dataset.data.reduce((a,b) => a+b, 0);
+            return `${ctx.label}: ${ctx.raw}製品 (${(ctx.raw/total*100).toFixed(1)}%)`;
+          }
+        }
+      }
+    }
+  }
+});
+
+// 7. 住宅着工数推移
+const housingLabels = [
+  '2022-01','2022-02','2022-03','2022-04','2022-05','2022-06',
+  '2022-07','2022-08','2022-09','2022-10','2022-11','2022-12',
+  '2023-01','2023-02','2023-03','2023-04','2023-05','2023-06',
+  '2023-07','2023-08','2023-09','2023-10','2023-11','2023-12',
+  '2024-01','2024-02','2024-03','2024-04','2024-05','2024-06',
+  '2024-07','2024-08','2024-09','2024-10','2024-11','2024-12'
+];
+const housingTotal = [63605,61887,86800,73060,69621,73920,70483,61099,73060,75638,74779,77358,60652,59012,82680,69668,66390,70488,67209,58299,69668,72127,71308,73766,58615,57031,79791,67328,64161,68121,64952,56398,67328,69705,68912,71289];
+const marketSizeOku = [361.9,352.1,493.9,415.7,396.1,420.6,401.0,347.6,415.7,430.4,425.5,440.1,345.1,335.8,470.4,396.4,377.7,401.1,382.4,331.7,396.4,410.4,405.7,419.7,333.5,324.5,454.0,383.1,365.1,387.6,369.6,320.9,383.1,396.6,392.1,405.6];
+
+new Chart(document.getElementById('housingChart'), {
+  type: 'line',
+  data: {
+    labels: housingLabels,
+    datasets: [{
+      label: '新設住宅着工戸数',
+      data: housingTotal,
+      borderColor: '#64ffda',
+      backgroundColor: 'rgba(100,255,218,0.1)',
+      fill: true,
+      tension: 0.3,
+      yAxisID: 'y'
+    },{
+      label: '照明市場規模推計（億円）',
+      data: marketSizeOku,
+      borderColor: '#ff6b9d',
+      backgroundColor: 'rgba(255,107,157,0.1)',
+      fill: true,
+      tension: 0.3,
+      yAxisID: 'y1'
+    }]
+  },
+  options: {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      x: { ticks: { maxRotation: 45, autoSkip: true, maxTicksLimit: 12 } },
+      y: { title: { display: true, text: '着工戸数' }, beginAtZero: false },
+      y1: { position: 'right', title: { display: true, text: '市場規模（億円）' }, grid: { drawOnChartArea: false } }
+    }
+  }
+});
+
+// 8. セグメント別市場規模
+new Chart(document.getElementById('marketSegmentChart'), {
+  type: 'bar',
+  data: {
+    labels: ['2020年','2021年','2022年','2023年','2024年'],
+    datasets: [
+      { label: '持家', data: [2604,2787,2507,2220,2159], backgroundColor: '#64ffda' },
+      { label: '分譲', data: [1373,1428,1459,1407,1287], backgroundColor: '#60a5fa' },
+      { label: '貸家', data: [814,853,916,913,908], backgroundColor: '#c084fc' },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.raw}億円` } }
+    },
+    scales: {
+      x: {},
+      y: { stacked: true, title: { display: true, text: '市場規模（億円）' } }
+    }
+  }
+});
+
+// 9. 住宅タイプ別推移
+new Chart(document.getElementById('housingTypeChart'), {
+  type: 'line',
+  data: {
+    labels: ['2020年','2021年','2022年','2023年','2024年'],
+    datasets: [
+      { label: '持家', data: [264072,282610,254163,225129,218887], borderColor: '#64ffda', tension: 0.3, pointRadius: 5 },
+      { label: '貸家', data: [306595,321209,344901,343715,341868], borderColor: '#c084fc', tension: 0.3, pointRadius: 5 },
+      { label: '分譲', data: [241287,250990,256470,247253,226264], borderColor: '#60a5fa', tension: 0.3, pointRadius: 5 },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.raw.toLocaleString()}戸` } }
+    },
+    scales: {
+      y: { title: { display: true, text: '年間着工戸数' } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
