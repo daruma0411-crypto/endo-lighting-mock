@@ -635,6 +635,38 @@ img {
     color: var(--color-white);
 }
 
+.footer-sns {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.footer-sns a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: var(--color-gray-800);
+    color: var(--color-gray-400);
+    transition: all var(--transition-fast);
+}
+
+.footer-sns a:hover {
+    background: var(--color-accent-blue);
+    color: var(--color-white);
+}
+
+.footer-sns a.sns-twitter:hover {
+    background: #000000;
+}
+
+.footer-sns svg {
+    width: 18px;
+    height: 18px;
+}
+
 .footer-bottom {
     padding-top: var(--spacing-xl);
     text-align: center;
@@ -643,6 +675,67 @@ img {
 .footer-bottom p {
     font-size: var(--font-size-xs);
     color: var(--color-gray-500);
+}
+
+/* Twitter Timeline Section */
+.twitter-section {
+    padding: var(--spacing-3xl) 0;
+    background: var(--color-white);
+}
+
+.twitter-section .container {
+    max-width: 600px;
+}
+
+.twitter-timeline-wrapper {
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    min-height: 400px;
+}
+
+/* Share Button */
+.share-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    font-size: 0.85rem;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.share-btn:hover {
+    border-color: #333;
+    color: #333;
+}
+
+.share-btn-x {
+    border-color: #000;
+    color: #000;
+}
+
+.share-btn-x:hover {
+    background: #000;
+    color: #fff;
+}
+
+.share-btn svg {
+    width: 16px;
+    height: 16px;
 }
 
 /* ============================================
